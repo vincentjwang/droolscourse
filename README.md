@@ -11,7 +11,7 @@ Drools的开发环境搭建通常有两种方式，本人亲测两种都能安�
 OS: Ubuntu10.10
 JRE version: 1.8.0_45
 IDE: Eclipse
-### Install Method 1 - Eclipse install new software
+### Installation Method 1 - Eclipse install new software
 到Drools下载页面(http://www.jboss.org/drools/downloads.html)
 -下载并解压Drools：drools-distribution-5.5.0.Final.zip  (解压目录随意)
 -下载并解压插件：droolsjbpm-tools-distribution-5.5.0.Final.zip(解压目录随意)
@@ -32,7 +32,7 @@ IDE: Eclipse
 - 点击"OK"
 - 点击"OK"
 
-### Install Method 2 - Plugins link
+### Installation Method 2 - Plugins link
 下载Method1中的两个压缩包
 * 在Eclipse安装目录下创建两个文件links, myPlugins(名字随意)
 * 在myplugin下新建一个drools文件夹。。将以解压后的文件的上一层目录下features,plugins 复制到里面
@@ -40,3 +40,4 @@ IDE: Eclipse
 * 保存关闭 drools.txt，并将后缀改成 drools.link，重启 eclipse
 * 安装运行时方式如Method 1
 
+## 示例程序
