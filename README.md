@@ -18,7 +18,7 @@ IDE: Eclipse
 - 打开 Eclipse.
 - 点 "Help"—"Install new software..."
 - 点击 "Add..."  
-- 在name中输入"Drools5.5"（名字随意起）
+- 在name中输入"Drools5.5"(名字随意起)
 - 点击 "Local..." 并且选择"......./binaries/org.drools.updatesite" (此目录在刚刚解压的插件中)
 - 点击OK
 - 选择所以插件。
@@ -31,4 +31,12 @@ IDE: Eclipse
 - 在弹出窗口中name输入Drools5.5 Runtime(随意起个名字)，在Path选择"......./drools-distribution-5.5.0.Final/drools-distribution-5.5.0.Final/binaries" (此目录在刚刚解压的Drools中)，
 - 点击"OK"
 - 点击"OK"
+
+### Install Method 2 - Plugins link
+下载Method1中的两个压缩包
+* 在Eclipse安装目录下创建两个文件links, myPlugins(名字随意)
+* 在myplugin下新建一个drools文件夹。。将以解压后的文件的上一层目录下features,plugins 复制到里面
+* 在 links 目录下创建一个 drools.txt(名字随意)，打开并输入：path=(Eclipse路径)\\eclipse\\myplugins\\drools
+* 保存关闭 drools.txt，并将后缀改成 drools.link，重启 eclipse
+* 安装运行时方式如Method 1
 
