@@ -11,6 +11,7 @@ Drools的开发环境搭建通常有两种方式，本人亲测两种都能安�
 * OS: Ubuntu10.10
 * JRE version: 1.8.0_45
 * IDE: Eclipse
+
 ### Installation Method 1 - Eclipse install new software
 到Drools下载页面(http://www.jboss.org/drools/downloads.html)
 -下载并解压Drools：drools-distribution-5.5.0.Final.zip  (解压目录随意)
@@ -152,7 +153,9 @@ end
 ```
 
 运行下试试看，可以看到控制台输出了
+
 Hello World   </br>
+
 Goodbye cruel worlds   </br>
 
 可以看到我们并没有在java代码里写业务逻辑代码，业务都是包含在规则中的，这就是规则引擎的功劳了，以后的章节我们会详细分析。
