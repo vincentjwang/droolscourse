@@ -8,9 +8,9 @@ Drools是一个业务规则管理系统解决方案。它提供一整套核心�
 ## Drools安装
 Drools的开发环境搭建通常有两种方式，本人亲测两种都能安装成功，不过个人更倾向于第一种，也是官方推荐的方法。
 ### 基础环境
-OS: Ubuntu10.10</br>
-JRE version: 1.8.0_45</br>
-IDE: Eclipse
+* OS: Ubuntu10.10
+* JRE version: 1.8.0_45
+* IDE: Eclipse
 ### Installation Method 1 - Eclipse install new software
 到Drools下载页面(http://www.jboss.org/drools/downloads.html)
 -下载并解压Drools：drools-distribution-5.5.0.Final.zip  (解压目录随意)
@@ -151,8 +151,8 @@ rule "GoodBye"
 end
 ```
 
-运行下试试看，可以看到控制台输出了</br>
-Hello World</br>
-Goodbye cruel worlds</br>
+运行下试试看，可以看到控制台输出了
+Hello World   </br>
+Goodbye cruel worlds   </br>
 
 可以看到我们并没有在java代码里写业务逻辑代码，业务都是包含在规则中的，这就是规则引擎的功劳了，以后的章节我们会详细分析。
