@@ -46,8 +46,8 @@
 
 
       <section id="main_content">
-        <h3>
-<a id="drools介绍和环境搭建" class="anchor" href="#drools%E4%BB%8B%E7%BB%8D%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Drools介绍和环境搭建</h3>
+        <h1>
+<a id="drools介绍和环境搭建" class="anchor" href="#drools%E4%BB%8B%E7%BB%8D%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Drools介绍和环境搭建</h1>
 
 <p>关于Drools的介绍，我们看下官网的描述：</p>
 
@@ -55,7 +55,65 @@
 <p>Drools is a Business Rules Management System (BRMS) solution. It provides a core Business Rules Engine (BRE), a web authoring and rules management application (Drools Workbench) and an Eclipse IDE plugin for core development.</p>
 </blockquote>
 
-<p>Drools是一个业务规则管理系统解决方案。它提供一整套核心业务规则引擎(BRE)，Web验证和规则管理应用(Drools Workbench)和Eclipse IDE插件。</p>
+<p>Drools是一个业务规则管理系统解决方案。它提供一整套核心业务规则引擎(BRE)，Web验证规则管理应用(Drools Workbench)和Eclipse IDE插件。我们用到的只是解决方案中的规则引擎部分，它允许开发人员将业务规则以规则文件的形式存储，这样业务改变只需要修改规则文件，不需要修改代码部署版本即可完成业务的引入或变更。</p>
+
+<h2>
+<a id="drools安装" class="anchor" href="#drools%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>Drools安装</h2>
+
+<p>Drools的开发环境搭建通常有两种方式，本人亲测两种都能安装成功，不过个人更倾向于第一种，也是官方推荐的方法。</p>
+
+<h3>
+<a id="基础环境" class="anchor" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>基础环境</h3>
+
+<p>OS: Ubuntu10.10
+JRE version: 1.8.0_45
+IDE: Eclipse</p>
+
+<h3>
+<a id="installation-method-1---eclipse-install-new-software" class="anchor" href="#installation-method-1---eclipse-install-new-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation Method 1 - Eclipse install new software</h3>
+
+<p>到Drools下载页面(<a href="http://www.jboss.org/drools/downloads.html">http://www.jboss.org/drools/downloads.html</a>)
+-下载并解压Drools：drools-distribution-5.5.0.Final.zip  (解压目录随意)
+-下载并解压插件：droolsjbpm-tools-distribution-5.5.0.Final.zip(解压目录随意)</p>
+
+<ul>
+<li>打开 Eclipse.</li>
+<li>点 "Help"—"Install new software..."</li>
+<li>点击 "Add..."<br>
+</li>
+<li>在name中输入"Drools5.5"(名字随意起)</li>
+<li>点击 "Local..." 并且选择"......./binaries/org.drools.updatesite" (此目录在刚刚解压的插件中)</li>
+<li>点击OK</li>
+<li>选择所以插件。
+-下面就是点击next，finish</li>
+</ul>
+
+<p>插件安装完后还需在Eclipse中添加Drools的运行环境：</p>
+
+<ul>
+<li>点击"Windows"—"Preferencess"</li>
+<li>在窗口的树形菜单中选择"Drools"—"Installed Drools Runtimes"</li>
+<li>在右边的空的Drools运行库列表中，点击"Add"</li>
+<li>在弹出窗口中name输入Drools5.5 Runtime(随意起个名字)，在Path选择"......./drools-distribution-5.5.0.Final/drools-distribution-5.5.0.Final/binaries" (此目录在刚刚解压的Drools中)，</li>
+<li>点击"OK"</li>
+<li>点击"OK"</li>
+</ul>
+
+<h3>
+<a id="installation-method-2---plugins-link" class="anchor" href="#installation-method-2---plugins-link" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation Method 2 - Plugins link</h3>
+
+<p>下载Method1中的两个压缩包</p>
+
+<ul>
+<li>在Eclipse安装目录下创建两个文件links, myPlugins(名字随意)</li>
+<li>在myplugin下新建一个drools文件夹。。将以解压后的文件的上一层目录下features,plugins 复制到里面</li>
+<li>在 links 目录下创建一个 drools.txt(名字随意)，打开并输入：path=(Eclipse路径)\eclipse\myplugins\drools</li>
+<li>保存关闭 drools.txt，并将后缀改成 drools.link，重启 eclipse</li>
+<li>安装运行时方式如Method 1</li>
+</ul>
+
+<h2>
+<a id="示例程序" class="anchor" href="#%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>示例程序</h2>
       </section>
 
       <footer>
