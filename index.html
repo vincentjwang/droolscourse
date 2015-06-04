@@ -65,9 +65,11 @@
 <h3>
 <a id="基础环境" class="anchor" href="#%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>基础环境</h3>
 
-<p>OS: Ubuntu10.10
-JRE version: 1.8.0_45
-IDE: Eclipse</p>
+<ul>
+<li>OS: Ubuntu10.10</li>
+<li>JRE version: 1.8.0_45</li>
+<li>IDE: Eclipse</li>
+</ul>
 
 <h3>
 <a id="installation-method-1---eclipse-install-new-software" class="anchor" href="#installation-method-1---eclipse-install-new-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation Method 1 - Eclipse install new software</h3>
@@ -114,6 +116,123 @@ IDE: Eclipse</p>
 
 <h2>
 <a id="示例程序" class="anchor" href="#%E7%A4%BA%E4%BE%8B%E7%A8%8B%E5%BA%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>示例程序</h2>
+
+<p>打开Eclipse -&gt; File -&gt; New -&gt; Drools Project，输入项目名后会有示例程序的选项，先全部勾选上吧。
+可以看到生成的项目里包含了很多文件，我们暂时先不用理清每个文件的含义，重点关注src/main/java/com.sample/DroolsTest.java和src/main/rules/Sample.drl</p>
+
+<p>DroolsTest.java</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smi">com.sample</span>;
+
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.KnowledgeBase</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.KnowledgeBaseFactory</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.builder.KnowledgeBuilder</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.builder.KnowledgeBuilderError</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.builder.KnowledgeBuilderErrors</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.builder.KnowledgeBuilderFactory</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.builder.ResourceType</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.io.ResourceFactory</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.logger.KnowledgeRuntimeLogger</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.logger.KnowledgeRuntimeLoggerFactory</span>;
+<span class="pl-k">import</span> <span class="pl-smi">org.drools.runtime.StatefulKnowledgeSession</span>;
+
+<span class="pl-c">/**</span>
+<span class="pl-c"> * This is a sample class to launch a rule.</span>
+<span class="pl-c"> */</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">DroolsTest</span> {
+
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">void</span> <span class="pl-en">main</span>(<span class="pl-k">String</span>[] <span class="pl-v">args</span>) {
+        <span class="pl-k">try</span> {
+            <span class="pl-c">// load up the knowledge base</span>
+            <span class="pl-smi">KnowledgeBase</span> kbase <span class="pl-k">=</span> readKnowledgeBase();
+            <span class="pl-smi">StatefulKnowledgeSession</span> ksession <span class="pl-k">=</span> kbase<span class="pl-k">.</span>newStatefulKnowledgeSession();
+            <span class="pl-smi">KnowledgeRuntimeLogger</span> logger <span class="pl-k">=</span> <span class="pl-smi">KnowledgeRuntimeLoggerFactory</span><span class="pl-k">.</span>newFileLogger(ksession, <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>);
+            <span class="pl-c">// go !</span>
+            <span class="pl-smi">Message</span> message <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Message</span>();
+            message<span class="pl-k">.</span>setMessage(<span class="pl-s"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>);
+            message<span class="pl-k">.</span>setStatus(<span class="pl-smi">Message</span><span class="pl-c1"><span class="pl-k">.</span>HELLO</span>);
+            ksession<span class="pl-k">.</span>insert(message);
+            ksession<span class="pl-k">.</span>fireAllRules();
+            logger<span class="pl-k">.</span>close();
+        } <span class="pl-k">catch</span> (<span class="pl-smi">Throwable</span> t) {
+            t<span class="pl-k">.</span>printStackTrace();
+        }
+    }
+
+    <span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-smi">KnowledgeBase</span> <span class="pl-en">readKnowledgeBase</span>() <span class="pl-k">throws</span> <span class="pl-smi">Exception</span> {
+        <span class="pl-smi">KnowledgeBuilder</span> kbuilder <span class="pl-k">=</span> <span class="pl-smi">KnowledgeBuilderFactory</span><span class="pl-k">.</span>newKnowledgeBuilder();
+        kbuilder<span class="pl-k">.</span>add(<span class="pl-smi">ResourceFactory</span><span class="pl-k">.</span>newClassPathResource(<span class="pl-s"><span class="pl-pds">"</span>Sample.drl<span class="pl-pds">"</span></span>), <span class="pl-smi">ResourceType</span><span class="pl-c1"><span class="pl-k">.</span>DRL</span>);
+        <span class="pl-smi">KnowledgeBuilderErrors</span> errors <span class="pl-k">=</span> kbuilder<span class="pl-k">.</span>getErrors();
+        <span class="pl-k">if</span> (errors<span class="pl-k">.</span>size() <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) {
+            <span class="pl-k">for</span> (<span class="pl-smi">KnowledgeBuilderError</span> error<span class="pl-k">:</span> errors) {
+                <span class="pl-smi">System</span><span class="pl-k">.</span>err<span class="pl-k">.</span>println(error);
+            }
+            <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-smi">IllegalArgumentException</span>(<span class="pl-s"><span class="pl-pds">"</span>Could not parse knowledge.<span class="pl-pds">"</span></span>);
+        }
+        <span class="pl-smi">KnowledgeBase</span> kbase <span class="pl-k">=</span> <span class="pl-smi">KnowledgeBaseFactory</span><span class="pl-k">.</span>newKnowledgeBase();
+        kbase<span class="pl-k">.</span>addKnowledgePackages(kbuilder<span class="pl-k">.</span>getKnowledgePackages());
+        <span class="pl-k">return</span> kbase;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">class</span> <span class="pl-en">Message</span> {
+
+        <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">HELLO</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+        <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">GOODBYE</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;
+
+        <span class="pl-k">private</span> <span class="pl-smi">String</span> message;
+
+        <span class="pl-k">private</span> <span class="pl-k">int</span> status;
+
+        <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">getMessage</span>() {
+            <span class="pl-k">return</span> <span class="pl-v">this</span><span class="pl-k">.</span>message;
+        }
+
+        <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">setMessage</span>(<span class="pl-smi">String</span> <span class="pl-v">message</span>) {
+            <span class="pl-v">this</span><span class="pl-k">.</span>message <span class="pl-k">=</span> message;
+        }
+
+        <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">getStatus</span>() {
+            <span class="pl-k">return</span> <span class="pl-v">this</span><span class="pl-k">.</span>status;
+        }
+
+        <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">setStatus</span>(<span class="pl-k">int</span> <span class="pl-v">status</span>) {
+            <span class="pl-v">this</span><span class="pl-k">.</span>status <span class="pl-k">=</span> status;
+        }
+
+    }
+
+}</pre></div>
+
+<p>Sample.drl</p>
+
+<div class="highlight highlight-java"><pre><span class="pl-k">package</span> <span class="pl-smi">com.sample</span>
+
+<span class="pl-k">import</span> <span class="pl-smi">com.sample.DroolsTest.Message</span>;
+
+rule <span class="pl-s"><span class="pl-pds">"</span>Hello World<span class="pl-pds">"</span></span>
+    when
+        $m <span class="pl-k">:</span> Message( status <span class="pl-k">==</span> <span class="pl-smi">Message</span><span class="pl-c1"><span class="pl-k">.</span>HELLO</span>, $myMessage <span class="pl-k">:</span> message )
+    then
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println( $myMessage );
+        $m<span class="pl-k">.</span>setMessage( <span class="pl-s"><span class="pl-pds">"</span>Goodbye cruel worlds<span class="pl-pds">"</span></span> );
+        $m<span class="pl-k">.</span>setStatus( <span class="pl-smi">Message</span><span class="pl-c1"><span class="pl-k">.</span>GOODBYE</span> );
+        update( $m );
+end
+
+rule <span class="pl-s"><span class="pl-pds">"</span>GoodBye<span class="pl-pds">"</span></span>
+    when
+        Message( status <span class="pl-k">==</span> <span class="pl-smi">Message</span><span class="pl-c1"><span class="pl-k">.</span>GOODBYE</span>, $myMessage <span class="pl-k">:</span> message )
+    then
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println( $myMessage );
+end</pre></div>
+
+<p>运行下试试看，可以看到控制台输出了</p>
+
+<p>Hello World   </p>
+
+<p>Goodbye cruel worlds   </p>
+
+<p>可以看到我们并没有在java代码里写业务逻辑代码，业务都是包含在规则中的，这就是规则引擎的功劳了，以后的章节我们会详细分析。</p>
       </section>
 
       <footer>
